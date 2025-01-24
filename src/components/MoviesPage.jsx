@@ -4,13 +4,18 @@ import MovieCard from "./MovieCard";
 
 function MoviesPage() {
     const [movies, setMovies] = useState([])
+    // const backendUrl = import.meta.env.VITE_BACKEND_URL;
+ 
 
-    useEffect(() => {
-       getMovies()
+   
+    //indirizzo di backend e`variabile d ambiente
+   
+ useEffect(() => {
+        getMovies()
     }, []);
 
     const getMovies = () => {
-        axios.get("http://localhost:3000/movies").then((resp) => {
+        axios.get(`http://localhost:3000/movies`).then((resp) => {
             setMovies(resp.data.data)
         })
     }
