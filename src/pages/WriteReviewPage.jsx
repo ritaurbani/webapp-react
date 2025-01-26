@@ -57,7 +57,7 @@ const WriteReviewPage = () => {
             {/* stars */}
             {/* <div>
                 {[1,2,3,4,5].map((star) => (
-                    <span onClick={}><i key={i} className="fa-regular fa-star"></i></span>
+                    <span onClick={}><i key={i} className="fa-regular fa-star">&#9733</i></span>
                 ))}
             </div> */}
             <button type='submit'>Submit your review</button>
