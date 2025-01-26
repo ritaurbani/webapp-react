@@ -6,6 +6,7 @@ function HomePage() {
             <section>
                 <h1>Welcome</h1>
                 <p>Write a review here</p>
+                <Link to={"/movie/"} className="btn" >Leave a review</Link>
                 <Link to={"/movies"} className="btn" >Search for Movies</Link>
             </section>
         </>
