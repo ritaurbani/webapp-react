@@ -95,3 +95,24 @@ ul {
     width: 30%;
     margin-bottom: 15px;
   }
+
+  .container-movieDetail {
+    margin-left: 20px;
+  }
+
+  .row-reviewCard {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .card-review {
+     width: 60%;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+  }

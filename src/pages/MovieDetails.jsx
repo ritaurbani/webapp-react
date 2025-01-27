@@ -23,8 +23,8 @@ const MovieDetails = () => {
         <>
             { //perche faccio questo controllo..
                 movie && (
-                    <>
-                        <section className='container'>
+                    <div className='container-movieDetail'>
+                        <section>
                             <img className= "img-detail" src={`http://localhost:3000/img/${movie.image}`} alt="" />
                             <h2>{movie.title} </h2>
                             <p>Director: {movie.director}</p>
@@ -34,20 +34,17 @@ const MovieDetails = () => {
                             {/* <p>vote: {movie.vote}</p> */}
                         </section>
                         <section>
-                            <div className='row'>
+                            <div className='row-reviewCard'>
                                 {movie.reviews.map((curReview) => (
                                     <ReviewCard 
                                     key = {curReview.id}
                                     review = {curReview}/>
-                                ))}
-                                
+                                ))}           
                             </div>
-
                         </section>
-                    </>
+                    </div>
                 )
             }
-
         </>
     )
 }
