@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function MovieCard({ movie }) {
     // const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -11,7 +13,7 @@ function MovieCard({ movie }) {
             <div className="card-content">
                 <h5>{movie.title} <br /> {movie.director}</h5>
                 <p>{movie.abstract}</p>
-                mostra dettagli
+                <Link to={`/movies/${movie.id}`} className="btn" >Movie details</Link>
             </div>
         </div>
 
