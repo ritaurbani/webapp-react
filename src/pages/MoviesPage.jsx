@@ -3,11 +3,12 @@ import axios from "axios";
 import MovieCard from "../components/MovieCard";
 
 function MoviesPage() {
-//creo array generi
-    const genre = ["Poesia Epica", "Romanzo Storico"]
+    //creo array generi
+    const genres = ["Science Fiction", "Crime", "Romance", "Action"]
 
     const [movies, setMovies] = useState([])
     const [search, setSearch] = useState("")
+    const [selectedGenre, setSelectedGenre] = useState("")
     // const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     //indirizzo di backend e`variabile d ambiente
@@ -23,6 +24,10 @@ function MoviesPage() {
             //parametro search > backend controlla se c e questo parametro e aggiunge where alla query sql...
             params.search = search
         }
+
+        if (selectedGenre !== "") {
+            params.genre = selectedGenre
+        }
         axios.get(`http://localhost:3000/movies`, { params }).then((resp) => {
             setMovies(resp.data.data)
         })
@@ -33,10 +38,24 @@ function MoviesPage() {
             <div className="container">
                 <h1>List of Movies</h1>
                 <div className="search">
-                    <select name="" id="">
-                        <option value=""></option>
-                        {/* {genres.map(())} */}
+
+                    {/* FILTRO PER GENERE */}
+                    <select
+                    className="select"
+                        name=""
+                        id=""
+                        value={selectedGenre}
+                        onChange={(event) => setSelectedGenre(event.target.value)}>
+
+                        <option value=""> All Genres </option>
+                        {genres.map((curGenre, index) => (
+                            <option key={index} value={curGenre}>
+                                {curGenre}
+                            </option>
+                        ))}
                     </select>
+
+                    {/* SEARCH BAR */}
                     <input
                         className="search-bar"
                         type="search"
@@ -51,7 +70,7 @@ function MoviesPage() {
                 {movies.length > 0 ? (<div className="row">
                     {movies.map((curMovie) => (
                         <div className="col" key={curMovie.id}>
-                            <MovieCard movie={curMovie}/>
+                            <MovieCard movie={curMovie} />
                         </div>
                     ))}
                 </div>) : (<p>No results. Please try again</p>)
