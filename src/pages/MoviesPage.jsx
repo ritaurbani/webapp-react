@@ -3,13 +3,15 @@ import axios from "axios";
 import MovieCard from "../components/MovieCard";
 
 function MoviesPage() {
+
+const apiUrl = import.meta.env.VITE_BACKEND_URL
+
     //creo array generi
     const genres = ["Science Fiction", "Crime", "Romance", "Action"]
 
     const [movies, setMovies] = useState([])
     const [search, setSearch] = useState("")
     const [selectedGenre, setSelectedGenre] = useState("")
-    // const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     //indirizzo di backend e`variabile d ambiente
 
@@ -28,9 +30,17 @@ function MoviesPage() {
         if (selectedGenre !== "") {
             params.genre = selectedGenre
         }
-        axios.get(`http://localhost:3000/movies`, { params }).then((resp) => {
+        console.log(`${apiUrl}/movies`)
+        console.log(`${apiUrl}/movies`, {params})
+        axios.get(`${apiUrl}/movies`, { params }).then((resp) => {
+            console.log(resp)
             setMovies(resp.data.data)
         })
+    }
+
+    const handleOnChange = (event) => {
+        setSelectedGenre(event.target.value)
+        getMovies()
     }
 
     return (
@@ -45,7 +55,7 @@ function MoviesPage() {
                         name=""
                         id=""
                         value={selectedGenre}
-                        onChange={(event) => setSelectedGenre(event.target.value)}>
+                        onChange={handleOnChange}>
 
                         <option value=""> All Genres </option>
                         {genres.map((curGenre, index) => (

@@ -12,8 +12,8 @@ function MovieCard({ movie }) {
                 "https://picsum.photos/400/600"} alt="" />
             <div className="card-content">
                 <h5>{movie.title} <br /> {movie.director}</h5>
-                <p>{movie.abstract}</p>
-                <Link to={`/movies/${movie.id}`} className="btn" >Movie details</Link>
+                {/* <p>{movie.abstract}</p> */}
+                <Link to={`/movies/${movie.slug}`} className="btn" >Movie details</Link>
             </div>
         </div>
 

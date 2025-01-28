@@ -1,0 +1,19 @@
+.carousel {
+    width: 50%;
+    height: 500px;
+    background-color: aquamarine;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.carouselInner {
+    margin-top: 30px;
+    height:100%;
+    width: 100%;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+}
+

@@ -12,8 +12,23 @@
 .navBar {
   display: flex;
   align-items: center;
-  background-color: #D3D8B3 ;
+  background-color: #324A4A ;
   margin-bottom: 20px;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: white;
+}
+
+.navBar h3 {
+  color: white;
+  font-size: 20px;
+}
+
+.navBar a:hover,
+.navBar .active {
+  color: #DDCACA;
 }
 
 ul {
@@ -24,13 +39,16 @@ ul {
   text-decoration: none;
 }
 
+ul li {
+  color: white;
+}
 .active {
     text-decoration: none;
     color: black;
 }
 
 .btn {
-  background-color: #4CAF50;
+  background-color: #324A4A;
   border: none;
   color: white;
   padding: 15px 25px;
@@ -42,6 +60,7 @@ ul {
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 20px;
+ 
 }
 
 .row {
@@ -129,5 +148,89 @@ ul {
   flex-direction: column;
   gap: 10px; */
   line-height: 30px;
-  
   }
+
+  .back {
+    display: flex; 
+ align-items: flex-end;
+  /* Necessario per il posizionamento assoluto del bottone */
+  
+  /* Puoi regolare l'altezza del contenitore */
+  /* Puoi regolare la larghezza del contenitore */
+}
+
+.back-btn {
+position: relative;
+bottom:0;
+left:10px
+}
+
+/* FORM */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-input,
+.form-text,
+.form-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-input:focus,
+.form-text:focus,
+.form-select:focus {
+  border-color: #4CAF50;
+}
+
+button.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.btn:hover {
+  background-color: #45a049;
+}
+
+button.btn:active {
+  background-color: #3e8e41;
+}
