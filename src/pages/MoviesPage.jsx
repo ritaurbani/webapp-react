@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "../components/MovieCard";
+import { Link } from "react-router-dom";
 
 function MoviesPage() {
 
@@ -47,6 +48,7 @@ const apiUrl = import.meta.env.VITE_BACKEND_URL
         <>
             <div className="container">
                 <h1>List of Movies</h1>
+                <Link className="btn" to={"/movies/create"}>Post a movie</Link>
                 <div className="search">
 
                     {/* FILTRO PER GENERE */}

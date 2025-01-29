@@ -85,7 +85,7 @@ const ReviewForm = ({handleSubmit,formData, setFormData}) => {
                       type="text"
                       placeholder='Leave a review'
                       name='text'
-                      value={formData.content}
+                      value={formData.text}
                       onChange={handleChange}></textarea>
               </div>
 
