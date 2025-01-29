@@ -7,22 +7,49 @@ import { Link } from 'react-router-dom'
 import ReviewCard from '../components/ReviewCard'
 import ReviewForm from '../components/ReviewForm'
 
+const initialData = {
+    name: "",
+    text: "",
+    vote: 0,
+}
+
 const MovieDetails = () => {
 
     const apiUrl = import.meta.env.VITE_BACKEND_URL
 
     const [movie, setMovie] = useState(null)
+    const [formData, setFormData] = useState(initialData)
+    
     //preleva id pagina corrente che sa dal percorso - prelevare i details del movie > axios per other info al mounting della pagina
     //abbiamo rotta con parametro che prendiamo con useParmas e usiamo per fare chiamata API
     const { slug } = useParams()
 
     const Navigate = useNavigate()
 
-    useEffect(() => {
+    const getMovie = () => {
+        //ci arriva un movie solo/obj perche c`e`slug
         axios.get(`${apiUrl}/movies/${slug}`).then((resp) => {
             setMovie(resp.data.data)
         })
+    }
+
+    useEffect(() => {
+        getMovie()
     }, [])
+
+    // funzione che invia i dati del form al server quando viene premuto submit
+    const handleSubmit = (formData) => {
+        //i dati del form vengono postati nel backend 
+        // axios.post(`${apiUrl}/movies`, formData).then((resp) => {    
+        // })
+        axios.post(`${apiUrl}/movies/${movie.id}/reviews`, formData).then((resp) => {
+            console.log("Review added:", resp.data); 
+            setFormData(initialData);
+            // Se il salvataggio della review è andata a buon fine richiediamo i dati aggiornati del libro dal server
+            getMovie() // Ricarica il film con le recensioni aggiornate
+        })
+    }
+
 
     return (
         <>
@@ -53,8 +80,11 @@ const MovieDetails = () => {
 
                         {/* REVIEW-FORM */}
                         <section>
-                            <ReviewForm/>
-             
+                            <ReviewForm 
+                            handleSubmit={handleSubmit}
+                            formData={formData}
+                            setFormData={setFormData}/>
+
                         </section>
                     </div>
                 )

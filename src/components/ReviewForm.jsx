@@ -4,43 +4,55 @@ import { useState } from 'react'
 const initialData = {
     name: "",
     text: "",
+    vote: 0,
 }
 
-const ReviewForm = () => {
+const ReviewForm = ({handleSubmit,formData, setFormData}) => {
 
     const apiUrl = import.meta.env.VITE_BACKEND_URL
 
     const availableScore = Array.from(Array(6).keys())
-   
-    const [formData, setFormData] = useState(initialData)
 
+    const [error, setError] =useState(false);
+
+    const isDataValid = () => {
+        if (formData.name.length <= 3 || 
+            formData.vote < 0 || 
+            formData.vote > 5 || 
+            (formData.text.length > 0 && formData.length < 5)) {
+            return false  //mi fermo perche errore non ce 
+        }
+        return true
+    };
+
+  const handleValidationSubmit = (event) => {
+    event.preventDefault();
+    setError(false);
+    if(!isDataValid()) {
+        setError(true);
+    } else {
+        handleSubmit(formData)
+    }
+  }
+   
+
+    //funzione che chiamiamo al cambiamento dell input per aggiornare i valori di initial data
     const handleChange = (event) => {
+        //prendere nome e valore del campo da cambiare da aggiungere all obj iniziale
+        //const {value, name} = event.target
         const keyToChange = event.target.name;
         const newValue = event.target.value;
         setFormData({ ...formData, [keyToChange]: newValue })
     };
 
-    const handleSubmit = (e) => {
-        event.preventDefault();
-        //i dati del form vengono postati nel backend 
-        axios.post(`${apiUrl}/movies`, formData).then((resp) => {
-            //Ora non ho lista di post-che e nell altra pagina-qui faccio redirect a quella lista o singolo post
-            navigate("/posts")
-            // //Il server salva il nuovo post e restituisce la risposta con i dati del post appena salvato.
-            // console.log(resp)
-            // // 2 creo la copia dell'array posts precedente, aggiungendo il nuovo post
-            // const newArray = [...posts, resp.data];
-            // // 3. L'array posts viene aggiornato con il nuovo post - setPosts sincronizza l'interfaccia utente ta con il backend
-            // setPosts(newArray);
-            // // 4. Ripulisco i campi del form reset back to initial values after the post has been added.
-            // setFormData(initialFormData);
-        })
-    }
 
   return (
     
       <div className='form-container'>
-          <form onSubmit={handleSubmit}>
+
+          {/* funzione per inviare i dati del form, dove formData è l'oggetto contenente i dati da inviare. */}
+          {/* <form onSubmit={(event) => {event.preventDefault(); handleSubmit(formData)}}> */}
+          <form onSubmit={handleValidationSubmit}>
             <h2>Leave a review</h2>
 
               {/* name input */}
@@ -57,7 +69,7 @@ const ReviewForm = () => {
               {/* VOTO */}
              <div>
                   <label className='form-label' htmlFor="">Select a score</label>
-                <select className='form-select' name="" id="">
+                  <select className='form-select' name="vote" id="" onChange={handleChange}>
                     {availableScore.map((curVote) => (
                         <option key={curVote} value={curVote}>{curVote}</option>
                     ))}
@@ -72,11 +84,14 @@ const ReviewForm = () => {
                       className='form-text'
                       type="text"
                       placeholder='Leave a review'
-                      name='content'
+                      name='text'
                       value={formData.content}
                       onChange={handleChange}></textarea>
               </div>
 
+            {error && (
+                <div className='alert-banner'>VAlori Errati</div>
+            )}
               <button className='btn' type='submit'>Submit your review</button>
           </form>
       </div>
